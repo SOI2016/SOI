@@ -6,7 +6,10 @@ so that the synchronization process needed for the conventional Shared Memory ca
 
 The Framework will expose the following APIs to the user
 
-1) <Identifier> SOI_Create (PayloadFlag, Permissions)
-2) <Status> SOI_Send (Identifier, send_buf)
-3) <Status> SOI_Recv (Identifier, recv_buf)
-4) <Status> SOI_Destroy (Identifier)
+int isFull(CQUEUE *buf);
+int isEmpty(CQUEUE *buf);
+void init_cir_Buf(CQUEUE *buf, int shm_fd, void *shm_mem);
+int SOI_Create(const char *shm_name, int Payload_Size, int flag);
+int SOI_Send(int id, void *send_buf);
+int SOI_Recv(int id, void *recv_buf, int msg_flg);
+int SOI_Destroy(int id);

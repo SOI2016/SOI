@@ -1,0 +1,8 @@
+steps to create SOI shared library:
+
+1) $ gcc -c -Wall -Werror -fpic shm_que.c
+2) $ gcc -shared -o libshm.so shm_que.o
+3) $ sudo cp libshm.so /usr/lib/
+4) $ sudo chmod 0755 /usr/lib/libshm.so 
+5) $ gcc -Wall -o shmP1 shmP1.c -lshm -lrt
+6) $ gcc -Wall -o shmP2 shmP2.c -lshm -lrt

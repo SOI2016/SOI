@@ -13,7 +13,6 @@ int main(int argc , char *argv[])
 	getchar();
         SOI_Recv(shm_fd, recv_buf, 0);
 	printf("\nrecv_mesg=%s\n",recv_buf);
-
 	
 	SOI_Recv(shm_fd, recv_buf, 0);
 	printf("\nrecv_mesg=%s\n",recv_buf);

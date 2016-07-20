@@ -1,12 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <sys/mman.h>
+#include <sys/stat.h>
+#include <sys/types.h>
+#include <fcntl.h>
 #include <unistd.h>
 #include <string.h>
-#include <fcntl.h>
 #include <sys/shm.h>
-#include <sys/stat.h>
-#include <sys/mman.h>
-#include <sys/types.h>
 #include <errno.h>
 
 #define	SOI_SHMSIZE		4096
@@ -23,11 +23,9 @@
 #define EQEMPTY		13
 #define EINVALID	14
 
-/* Circular Queue Structure	*/
+/* Circular Queue Structure */
 typedef struct
 {
-	void *shm_mem;
-	void *curr_seg;
 	int shm_fd;
 	int front;
 	int rear;
@@ -38,11 +36,19 @@ typedef struct
 
 }CQUEUE;
 
+typedef struct
+{
+	void *shm_mem;
+	void *curr_seg;	
+}SHMPTR;
+
 /* Prototype declaration */
 int isFull(CQUEUE *buf);
 int isEmpty(CQUEUE *buf);
-void init_cir_Buf(CQUEUE *buf, int shm_fd, void *shm_mem);
+void init_cir_Buf(CQUEUE *buf, int shm_fd);
 int SOI_Create(const char *shm_name, int Payload_Size, int flag);
 int SOI_Send(int id, void *send_buf);
 int SOI_Recv(int id, void *recv_buf, int msg_flg);
 int SOI_Destroy(int id);
+
+
